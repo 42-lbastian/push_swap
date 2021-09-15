@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 10:43:16 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/09 16:10:48 by Bastian          ###   ########.fr       */
+/*   Updated: 2021/09/15 11:31:44 by Bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,16 @@
 int ft_sa_sb(t_list **lst, char *str)
 {
 	int content;
-	
+	int pivot;
+
 	if ((!(*lst)) || (*lst)->next == NULL)
 		return (1);
 	content = (*lst)->content;
+	pivot = (*lst)->pivot;
 	(*lst)->content = (*lst)->next->content;
+	(*lst)->pivot = (*lst)->next->pivot;
 	(*lst)->next->content = content;
+	(*lst)->next->pivot = pivot;
 	write(1, str, ft_strlen(str));
 	return (0);
 }
@@ -48,16 +52,20 @@ int	ft_pa_pb(t_list **lst_1, t_list **lst_2, char *str)
 int ft_ra_rb(t_list **lst, char *str)
 {
 	int value;
+	int pivot;
 
 	if (!((*lst)->next))
 		return (1);
 	value = (*lst)->content;
+	pivot = (*lst)->pivot;
 	while ((*lst)->next)
 	{
 		(*lst)->content = (*lst)->next->content;
+		(*lst)->pivot = (*lst)->next->pivot;
 		(*lst) = (*lst)->next;
 	}
 	(*lst)->content = value;
+	(*lst)->pivot = pivot;
 	while ((*lst)->prev)
 		(*lst) = (*lst)->prev;
 	write(1, str, ft_strlen(str));
@@ -74,18 +82,21 @@ int ft_rr(t_list **lst_a, t_list **lst_b)
 int ft_rra_rrb(t_list **lst, char *str)
 {
 	int value;
+	int pivot;
 
 	if (!((*lst)->next))
 		return (1);
 	while ((*lst)->next)
 		(*lst) = (*lst)->next;
 	value = (*lst)->content;
+	pivot = (*lst)->pivot;
 	while ((*lst)->prev)
 	{
-		(*lst)->content = (*lst)->prev->content;
+		(*lst)->pivot = (*lst)->prev->pivot;
 		(*lst) = (*lst)->prev;
 	}
 	(*lst)->content = value;
+	(*lst)->pivot = pivot;
 	write(1, str, ft_strlen(str));
 	return (0);
 }

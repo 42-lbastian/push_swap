@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:06:31 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/10 15:49:47 by Bastian          ###   ########.fr       */
+/*   Updated: 2021/09/15 11:54:41 by Bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,29 @@ void	ft_sort_three(t_list **lst)
 	}
 }
 
+void ft_send_a_to_b(t_list **lst_a, t_list **lst_b)
+{
+	int pivot;
+
+	while ((*lst_a))
+	{
+		pivot = (*lst_a)->content;
+		(*lst_a)->pivot = 1;
+		if ((*lst_a)->next)
+		{
+			ft_ra_rb(lst_a, RA);
+			while ((*lst_a)->pivot == 0)
+			{
+				if ((*lst_a)->content < pivot)
+					ft_pa_pb(lst_b, lst_a, PA);
+				else
+					ft_ra_rb(lst_a, RA);
+			}
+		}
+		ft_pa_pb(lst_b, lst_a, PA);
+	}
+}
+
 int main(int argc, char **argv)
 {
 	int i;
@@ -124,12 +147,12 @@ int main(int argc, char **argv)
 		{
 			if (ft_atoi(&lst_a, argv[i]))
 			{
-				printf("Error\n");
+						printf("Error\n");
 				return (1);
 			}
 			if (ft_check_dup(lst_a))
 			{
-				printf("Error\n");
+						printf("Error\n");
 				return (1);
 			}
 			i++;
@@ -139,8 +162,14 @@ int main(int argc, char **argv)
 		print_list(lst_a);
 		if (argc == 3)
 			ft_sa_sb(&lst_a, SA);
-		if (argc == 4)
+		else if (argc == 4)
 			ft_sort_three(&lst_a);
+		else
+		{
+			ft_send_a_to_b(&lst_a, &lst_b);
+			while ()
+		}
 		print_list(lst_a);
+		print_list(lst_b);
 	}
 }
