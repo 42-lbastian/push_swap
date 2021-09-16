@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:06:31 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/15 11:54:41 by Bastian          ###   ########.fr       */
+/*   Updated: 2021/09/15 15:26:09 by Bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,12 +122,51 @@ void ft_send_a_to_b(t_list **lst_a, t_list **lst_b)
 			while ((*lst_a)->pivot == 0)
 			{
 				if ((*lst_a)->content < pivot)
-					ft_pa_pb(lst_b, lst_a, PA);
+					ft_pa_pb(lst_b, lst_a, PB);
 				else
 					ft_ra_rb(lst_a, RA);
 			}
 		}
 		ft_pa_pb(lst_b, lst_a, PA);
+	}
+}
+
+int	ft_all_pivot(t_list *lst)
+{
+	if (!(lst))
+		return (1);
+	while (lst)
+	{
+		if (lst->pivot == 0)
+			return (1);
+		lst = lst->next;
+	}
+	return (0);
+}
+
+void	ft_check_pivot(t_list **lst)
+{
+	while ((*lst)->next)
+	{
+		if ((*lst)->pivot == 0 && (*lst)->next->pivot == 1)
+			(*lst)->pivot = 1;
+		(*lst) = (*lst)->next;
+	}
+	if ((*lst)->pivot == 0 && ft_lstfront((*lst))->pivot == 1)	
+		(*lst)->pivot = 1;
+	(*lst) = ft_lstfront((*lst));
+}
+
+void	ft_new_element(t_list **lst_a, t_list **lst_b)
+{
+	while ((*lst_b)->pivot == 1)
+		ft_ra_rb(lst_b, RB);
+	if ((*lst_b)->next->pivot == 1)
+		(*lst_b)->pivot = 1;
+	else
+	{
+		while ((*lst_b)->pivot == 0)
+			ft_pa_pb(lst_a, lst_b, PA);
 	}
 }
 
@@ -167,9 +206,21 @@ int main(int argc, char **argv)
 		else
 		{
 			ft_send_a_to_b(&lst_a, &lst_b);
-			while ()
+			while (ft_all_pivot(lst_b))
+			{
+				ft_new_element(&lst_a, &lst_b);
+				ft_send_a_to_b(&lst_a, &lst_b);
+				ft_check_pivot(&lst_b);
+				print_list(lst_a);
+				print_list(lst_b);
+			}
+			while ((lst_b))
+				ft_pa_pb(&lst_a, &lst_b, PA);
+			while (!(ft_list_is_sort(lst_a)))
+			{
+				ft_ra_rb(&lst_a, RA);
+			}
+			print_list(lst_a);
 		}
-		print_list(lst_a);
-		print_list(lst_b);
 	}
 }
