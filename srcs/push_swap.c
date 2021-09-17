@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:06:31 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/17 14:09:56 by lbastian         ###   ########.fr       */
+/*   Updated: 2021/09/17 14:51:42 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,7 +254,6 @@ void	ft_new_element(t_list **lst_a, t_list **lst_b)
 int main(int argc, char **argv)
 {
 	int i;
-	int pivot;
 	t_list *lst_a;
 	t_list *lst_b;
 
