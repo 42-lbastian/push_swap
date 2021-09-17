@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:06:31 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/17 12:49:19 by lbastian         ###   ########.fr       */
+/*   Updated: 2021/09/17 14:09:56 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,8 +180,6 @@ void	ft_sort_ffs(t_list **lst_a, t_list **lst_b, int nb)
 		ft_pa_pb(lst_a, lst_b, PA);
 	}
 	ft_right_order(lst_a);
-	print_list((*lst_a));
-	print_list((*lst_b));
 }
 
 void ft_send_a_to_b(t_list **lst_a, t_list **lst_b)
@@ -222,10 +220,16 @@ int	ft_all_pivot(t_list *lst)
 
 void	ft_check_pivot(t_list **lst)
 {
+	if ((*lst)->pivot == 0 && ft_lstlast((*lst))->pivot == 1 && (*lst)->next->pivot == 1)
+		(*lst)->pivot = 1;
+	(*lst) = (*lst)->next;
 	while ((*lst)->next)
 	{
-		if ((*lst)->pivot == 0 && (*lst)->next->pivot == 1)
-			(*lst)->pivot = 1;
+		if ((*lst)->prev)
+		{
+			if ((*lst)->pivot == 0 && (*lst)->next->pivot == 1 && (*lst)->prev->pivot == 1)
+				(*lst)->pivot = 1;
+		}
 		(*lst) = (*lst)->next;
 	}
 	if ((*lst)->pivot == 0 && ft_lstfront((*lst))->pivot == 1)	
@@ -237,6 +241,7 @@ void	ft_new_element(t_list **lst_a, t_list **lst_b)
 {
 	while ((*lst_b)->pivot == 1)
 		ft_ra_rb(lst_b, RB);
+
 	if ((*lst_b)->next->pivot == 1)
 		(*lst_b)->pivot = 1;
 	else
@@ -274,7 +279,6 @@ int main(int argc, char **argv)
 		}
 		if (ft_list_is_sort(lst_a))
 			return (0);
-		print_list(lst_a);
 		if (argc == 3)
 			ft_sa_sb(&lst_a, SA);
 		else if (argc == 4)
@@ -290,20 +294,13 @@ int main(int argc, char **argv)
 			ft_send_a_to_b(&lst_a, &lst_b);
 			while (ft_all_pivot(lst_b))
 			{
-				print_list(lst_b);
 				ft_new_element(&lst_a, &lst_b);
 				ft_send_a_to_b(&lst_a, &lst_b);
 				ft_check_pivot(&lst_b);
 			}
-			print_list(lst_b);
 			while ((lst_b))
 				ft_pa_pb(&lst_a, &lst_b, PA);
-			print_list(lst_a);
-			while (!(ft_list_is_sort(lst_a)))
-			{
-				break;
-				ft_ra_rb(&lst_a, RA);
-			}
+			ft_right_order(&lst_a);
 			print_list(lst_a);
 		}
 	}
