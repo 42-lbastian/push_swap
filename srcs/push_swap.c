@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:06:31 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/17 18:19:55 by lbastian         ###   ########.fr       */
+/*   Updated: 2021/09/17 19:38:23 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,12 +220,13 @@ void ft_send_a_to_b(t_list **lst_a, t_list **lst_b)
 	{
 		while ((*lst_a))
 		{
+			ft_lstlast((*lst_a))->last = 1;
 			pivot = (*lst_a)->content;
 			(*lst_a)->pivot = 1;
 			if ((*lst_a)->next)
 			{
 				ft_ra_rb(lst_a, RA);
-				while ((*lst_a)->pivot == 0)
+				while ((*lst_a)->last == 0)
 				{
 					if ((*lst_a)->content < pivot)
 						ft_pa_pb(lst_b, lst_a, PB);
@@ -236,6 +237,12 @@ void ft_send_a_to_b(t_list **lst_a, t_list **lst_b)
 			ft_pa_pb(lst_b, lst_a, PA);
 		}
 	}
+	printf("\nA\n");
+	print_list((*lst_a));
+	printf("B\n");
+	print_list((*lst_b));
+	exit (0);
+
 }
 
 int	ft_all_pivot(t_list *lst)
@@ -253,9 +260,12 @@ int	ft_all_pivot(t_list *lst)
 
 void	ft_check_pivot(t_list **lst)
 {
-	if ((*lst)->pivot == 0 && ft_lstlast((*lst))->pivot == 1 && (*lst)->next->pivot == 1)
-		(*lst)->pivot = 1;
-	(*lst) = (*lst)->next;
+	if ((*lst)->next)
+	{
+		if ((*lst)->pivot == 0 && ft_lstlast((*lst))->pivot == 1 && (*lst)->next->pivot == 1)
+			(*lst)->pivot = 1;
+		(*lst) = (*lst)->next;
+	}
 	while ((*lst)->next)
 	{
 		if ((*lst)->prev)
