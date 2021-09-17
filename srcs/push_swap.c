@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:06:31 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/16 16:56:10 by lbastian         ###   ########.fr       */
+/*   Updated: 2021/09/17 10:37:31 by Bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,14 +150,22 @@ void	ft_sort_three(t_list **lst)
 	}
 }
 
-void	ft_sort_five(t_list **lst_a, t_list **lst_b)
+void	ft_sort_ffs(t_list **lst_a, t_list **lst_b, int nb)
 {
 	ft_pa_pb(lst_b, lst_a, PB);
-	ft_pa_pb(lst_b, lst_a, PB);
+	if (nb > 4)
+		ft_pa_pb(lst_b, lst_a, PB);
+	if (nb > 5)
+		ft_pa_pb(lst_b, lst_a, PB);
 	if (!(ft_list_is_sort((*lst_a))))
 		ft_sort_three(lst_a);
 	if (!(ft_list_is_sort((*lst_b))))
-		ft_sa_sb(lst_b, SB);
+	{
+		if (nb == 5)
+			ft_sa_sb(lst_b, SB);
+		if (nb == 6)
+			ft_sort_three(lst_a);
+	}
 	while ((*lst_b))
 	{
 		if (ft_is_the_biggest((*lst_b)->content, (*lst_a)))
@@ -271,8 +279,10 @@ int main(int argc, char **argv)
 			ft_sa_sb(&lst_a, SA);
 		else if (argc == 4)
 			ft_sort_three(&lst_a);
+		else if (argc == 5)
+			ft_sort_ffs(&lst_a, &lst_b, 4);
 		else if (argc == 6)
-			ft_sort_five(&lst_a, &lst_b);
+			ft_sort_ffs(&lst_a, &lst_b, 5);
 		else
 		{
 			ft_send_a_to_b(&lst_a, &lst_b);
