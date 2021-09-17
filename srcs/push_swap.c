@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:06:31 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/17 14:51:42 by lbastian         ###   ########.fr       */
+/*   Updated: 2021/09/17 18:19:55 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int	ft_is_the_biggest(int nb, t_list *lst)
 	return (1);
 }
 
-void	ft_sort_three(t_list **lst)
+void	ft_sort_three_a(t_list **lst)
 {
 	if ((*lst)->content < (*lst)->next->content && (*lst)->next->content > (*lst)->next->next->content && (*lst)->content < (*lst)->next->next->content)
 	{
@@ -150,6 +150,26 @@ void	ft_sort_three(t_list **lst)
 	}
 }
 
+void	ft_sort_three_b(t_list **lst)
+{
+	if ((*lst)->content < (*lst)->next->content && (*lst)->next->content > (*lst)->next->next->content && (*lst)->content < (*lst)->next->next->content)
+	{
+		ft_sa_sb(lst, SB);
+		ft_ra_rb(lst, RB);
+	}
+	if ((*lst)->content > (*lst)->next->content && (*lst)->next->content < (*lst)->next->next->content && (*lst)->content < (*lst)->next->next->content)
+		ft_sa_sb(lst, SB);
+	if ((*lst)->content < (*lst)->next->content && (*lst)->next->content > (*lst)->next->next->content && (*lst)->content > (*lst)->next->next->content)
+		ft_rra_rrb(lst, RRB);
+	if ((*lst)->content > (*lst)->next->content && (*lst)->next->content < (*lst)->next->next->content && (*lst)->content > (*lst)->next->next->content)
+		ft_ra_rb(lst, RB);
+	if ((*lst)->content > (*lst)->next->content && (*lst)->next->content > (*lst)->next->next->content && (*lst)->content > (*lst)->next->next->content)
+	{
+		ft_sa_sb(lst, SB);
+		ft_rra_rrb(lst, RRB);
+	}
+}
+
 void	ft_sort_ffs(t_list **lst_a, t_list **lst_b, int nb)
 {
 	ft_pa_pb(lst_b, lst_a, PB);
@@ -158,13 +178,13 @@ void	ft_sort_ffs(t_list **lst_a, t_list **lst_b, int nb)
 	if (nb > 5)
 		ft_pa_pb(lst_b, lst_a, PB);
 	if (!(ft_list_is_sort((*lst_a))))
-		ft_sort_three(lst_a);
+		ft_sort_three_a(lst_a);
 	if (!(ft_list_is_sort((*lst_b))))
 	{
 		if (nb == 5)
 			ft_sa_sb(lst_b, SB);
 		if (nb == 6)
-			ft_sort_three(lst_b);
+			ft_sort_three_b(lst_b);
 	}
 	while ((*lst_b))
 	{
@@ -176,7 +196,7 @@ void	ft_sort_ffs(t_list **lst_a, t_list **lst_b, int nb)
 			break ;
 		}
 		while ((*lst_a)->content < (*lst_b)->content)
-				ft_ra_rb(lst_a, RA);
+			ft_ra_rb(lst_a, RA);
 		ft_pa_pb(lst_a, lst_b, PA);
 	}
 	ft_right_order(lst_a);
@@ -186,22 +206,35 @@ void ft_send_a_to_b(t_list **lst_a, t_list **lst_b)
 {
 	int pivot;
 
-	while ((*lst_a))
+	if (ft_lstsize((*lst_a)) == 3)
 	{
-		pivot = (*lst_a)->content;
 		(*lst_a)->pivot = 1;
-		if ((*lst_a)->next)
+		(*lst_a)->next->pivot = 1;
+		(*lst_a)->next->next->pivot = 1;
+		ft_sort_three_a(lst_a);
+		ft_pa_pb(lst_b, lst_a, PB);
+		ft_pa_pb(lst_b, lst_a, PB);
+		ft_pa_pb(lst_b, lst_a, PB);
+	}
+	else
+	{
+		while ((*lst_a))
 		{
-			ft_ra_rb(lst_a, RA);
-			while ((*lst_a)->pivot == 0)
+			pivot = (*lst_a)->content;
+			(*lst_a)->pivot = 1;
+			if ((*lst_a)->next)
 			{
-				if ((*lst_a)->content < pivot)
-					ft_pa_pb(lst_b, lst_a, PB);
-				else
-					ft_ra_rb(lst_a, RA);
+				ft_ra_rb(lst_a, RA);
+				while ((*lst_a)->pivot == 0)
+				{
+					if ((*lst_a)->content < pivot)
+						ft_pa_pb(lst_b, lst_a, PB);
+					else
+						ft_ra_rb(lst_a, RA);
+				}
 			}
+			ft_pa_pb(lst_b, lst_a, PA);
 		}
-		ft_pa_pb(lst_b, lst_a, PA);
 	}
 }
 
@@ -260,18 +293,18 @@ int main(int argc, char **argv)
 	lst_a = NULL;
 	lst_b = NULL;
 	i = 1;
-	if (argc > 1)
+	if (argc > 2)
 	{
 		while (i < argc )
 		{
 			if (ft_atoi(&lst_a, argv[i]))
 			{
-						printf("Error\n");
+				write(2, "Error\n", ft_strlen("Error\n"));
 				return (1);
 			}
 			if (ft_check_dup(lst_a))
 			{
-						printf("Error\n");
+				write(2, "Error\n", ft_strlen("Error\n"));
 				return (1);
 			}
 			i++;
@@ -281,7 +314,7 @@ int main(int argc, char **argv)
 		if (argc == 3)
 			ft_sa_sb(&lst_a, SA);
 		else if (argc == 4)
-			ft_sort_three(&lst_a);
+			ft_sort_three_b(&lst_a);
 		else if (argc == 5)
 			ft_sort_ffs(&lst_a, &lst_b, 4);
 		else if (argc == 6)
@@ -300,7 +333,8 @@ int main(int argc, char **argv)
 			while ((lst_b))
 				ft_pa_pb(&lst_a, &lst_b, PA);
 			ft_right_order(&lst_a);
-			print_list(lst_a);
 		}
 	}
+	else
+		write(2, "Error\n", ft_strlen("Error\n"));
 }
