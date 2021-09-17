@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:06:31 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/17 12:49:19 by lbastian         ###   ########.fr       */
+/*   Updated: 2021/09/17 12:20:27 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ void	ft_sort_ffs(t_list **lst_a, t_list **lst_b, int nb)
 		if (nb == 5)
 			ft_sa_sb(lst_b, SB);
 		if (nb == 6)
-			ft_sort_three(lst_b);
+			ft_sort_three(lst_a);
 	}
 	while ((*lst_b))
 	{
