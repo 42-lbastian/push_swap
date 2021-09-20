@@ -9,7 +9,6 @@ typedef struct s_list
 {
 	int content;
 	int pivot;
-	int last;
 	struct s_list *next;
 	struct s_list *prev;
 }				t_list;

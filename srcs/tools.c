@@ -6,11 +6,55 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 10:56:14 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/09 14:56:20 by Bastian          ###   ########.fr       */
+/*   Updated: 2021/09/20 15:01:29 by Bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lst.h"
+#include "../includes/tools.h"
+#include "../includes/operations.h"
+
+int		ft_list_is_sort(t_list *list)
+{
+	while (list->next)
+	{
+		if (list->content > list->next->content)
+			return (0);
+		list = list->next;
+	}
+	return (1);
+}
+
+void	ft_right_order(t_list **lst)
+{
+	int i;
+	int numb;
+	int y;
+
+	i = 0;
+	y = 0;
+	numb = (*lst)->content;
+	while((*lst)->next)
+	{
+		if ((*lst)->content < numb)
+		{
+			numb = (*lst)->content;
+			y = i;
+		}
+		i++;
+		(*lst) = (*lst)->next;
+	}
+	if ((*lst)->content < numb)
+		y = i;
+	(*lst) = ft_lstfront((*lst));
+	while (!(ft_list_is_sort((*lst))))
+	{
+		if (y < i / 2)
+			ft_ra_rb(lst, RA);
+		else
+			ft_rra_rrb(lst, RRA);
+	}
+}
 
 int ft_strlen(char *str)
 {

@@ -2,6 +2,15 @@
 #define OPERATIONS_H
 
 #include "lst.h"
+#define SA "sa\n"
+#define SB "sb\n"
+#define PA "pa\n"
+#define PB "pb\n"
+#define RA "ra\n"
+#define RB "rb\n"
+#define RRA "rra\n"
+#define RRB "rrb\n"
+
 
 int ft_sa_sb(t_list **lst, char *str);
 int ft_ss(t_list **lst_a, t_list **lst_b);

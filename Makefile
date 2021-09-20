@@ -1,12 +1,10 @@
 NAME = push_swap
 
-SRCS = srcs/lst_1.c srcs/operations.c srcs/push_swap.c srcs/tools.c
+SRCS = srcs/lst_1.c srcs/operations.c srcs/push_swap.c srcs/tools.c srcs/sort_ffs.c
 
 OBJS = ${SRCS:.c=.o}
 
 CC = gcc
-
-INCLUDES = includes/lst.h includes/tools.h includes/operations.h
 
 CFLAGS = -Wall -Wextra -Werror
 
