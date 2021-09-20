@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:06:31 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/20 15:19:12 by Bastian          ###   ########.fr       */
+/*   Updated: 2021/09/20 16:03:13 by Bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int main(int argc, char **argv)
 		if (argc == 3)
 			ft_sa_sb(&lst_a, SA);
 		else if (argc == 4)
-			ft_sort_three_a(&lst_a);
+			ft_sort_three_a_main(&lst_a);
 		else if (argc == 5)
 			ft_sort_ffs(&lst_a, &lst_b, 4);
 		else if (argc == 6)

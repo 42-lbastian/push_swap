@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:05:04 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/17 13:25:58 by lbastian         ###   ########.fr       */
+/*   Updated: 2021/09/20 15:26:04 by Bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstclear(t_list **lst)
 {
-	t_list *temp;
+	t_list	*temp;
 
 	while (*lst)
 	{
@@ -45,7 +45,7 @@ void	ft_lstdelone(t_list **lst)
 	}
 }
 
-void ft_lstadd_front(t_list **lst, t_list *new)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
 	if ((lst) && (*lst))
 	{
@@ -58,7 +58,7 @@ void ft_lstadd_front(t_list **lst, t_list *new)
 		(*lst) = new;
 }
 
-t_list *ft_lstlast(t_list *lst)
+t_list	*ft_lstlast(t_list *lst)
 {
 	if (!(lst))
 		return (lst);
@@ -67,50 +67,11 @@ t_list *ft_lstlast(t_list *lst)
 	return (lst);
 }
 
-t_list *ft_lstfront(t_list *lst)
+t_list	*ft_lstfront(t_list *lst)
 {
 	if (!(lst))
 		return (lst);
 	while (lst->prev)
 		lst = lst->prev;
 	return (lst);
-}
-
-void	ft_lstadd_back(t_list **lst, t_list *new)
-{
-	if ((lst) && (*lst))
-	{
-		new->next = NULL;
-		new->prev = ft_lstlast(*lst);
-		ft_lstlast(*lst)->next = new;
-	}
-	else
-		ft_lstadd_front(lst, new);
-}
-
-int ft_lstsize(t_list *lst)
-{
-	int size;
-
-	size = 0;
-	while (lst)
-	{
-		size++;
-		lst = lst->next;
-	}
-	return (size);
-}
-
-t_list *ft_lstnew(int content, int pivot)
-{
-	t_list *new;
-
-	new = malloc(sizeof(t_list));
-	if (!(new))
-		return (NULL);
-	new->content = content;
-	new->pivot = pivot;
-	new->next = NULL;
-	new->prev = NULL;
-	return (new);
 }
