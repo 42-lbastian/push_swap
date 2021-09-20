@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:06:31 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/20 15:03:36 by Bastian          ###   ########.fr       */
+/*   Updated: 2021/09/20 15:19:12 by Bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include "../includes/operations.h"
 #include "../includes/sort_ffs.h"
 #include "../includes/tools.h"
+#include "../includes/quicksort.h"
+#include "../includes/check.h"
 
 #define SA "sa\n"
 #define SB "sb\n"
@@ -50,115 +52,6 @@ void	print_list_r(t_list *list)
 		list = list->prev;
 	}
 	printf("\n");
-}
-
-int	ft_check_numb(int val, t_list *lst)
-{
-	int i;
-
-	i = 0;
-	while (lst)
-	{
-		if (lst->content == val)
-			i++;
-		lst = lst->next;
-	}
-	if (i > 1)
-		return (1);
-	return (0);
-}
-
-int ft_check_dup(t_list *lst)
-{
-	while (lst)
-	{
-		if (ft_check_numb(lst->content, ft_lstfront(lst)))
-			return (1);
-		lst = lst->next;
-	}
-	return (0);
-}
-
-void ft_send_a_to_b(t_list **lst_a, t_list **lst_b)
-{
-	int pivot;
-
-	if (ft_lstsize((*lst_a)) == 3)
-	{
-		(*lst_a)->pivot = 1;
-		(*lst_a)->next->pivot = 1;
-		(*lst_a)->next->next->pivot = 1;
-		ft_sort_three_a(lst_a);
-		ft_pa_pb(lst_b, lst_a, PB);
-		ft_pa_pb(lst_b, lst_a, PB);
-		ft_pa_pb(lst_b, lst_a, PB);
-	}
-	else
-	{
-		while ((*lst_a))
-		{
-			pivot = (*lst_a)->content;
-			(*lst_a)->pivot = 1;
-			if ((*lst_a)->next)
-			{
-				ft_ra_rb(lst_a, RA);
-				while ((*lst_a)->pivot == 0)
-				{
-					if ((*lst_a)->content < pivot)
-						ft_pa_pb(lst_b, lst_a, PB);
-					else
-						ft_ra_rb(lst_a, RA);
-				}
-			}
-			ft_pa_pb(lst_b, lst_a, PB);
-		}
-	}
-}
-
-int	ft_all_pivot(t_list *lst)
-{
-	if (!(lst))
-		return (1);
-	while (lst)
-	{
-		if (lst->pivot == 0)
-			return (1);
-		lst = lst->next;
-	}
-	return (0);
-}
-
-void	ft_check_pivot(t_list **lst)
-{
-	if ((*lst)->pivot == 0 && ft_lstlast((*lst))->pivot == 1 && (*lst)->next->pivot == 1)
-		(*lst)->pivot = 1;
-	(*lst) = (*lst)->next;
-	while ((*lst)->next)
-	{
-		if ((*lst)->prev)
-		{
-			if ((*lst)->pivot == 0 && (*lst)->next->pivot == 1 && (*lst)->prev->pivot == 1)
-				(*lst)->pivot = 1;
-		}
-		(*lst) = (*lst)->next;
-	}
-	if ((*lst)->pivot == 0 && ft_lstfront((*lst))->pivot == 1)	
-		(*lst)->pivot = 1;
-	(*lst) = ft_lstfront((*lst));
-}
-
-void	ft_new_element(t_list **lst_a, t_list **lst_b)
-{
-	while ((*lst_b)->pivot == 1)
-		ft_ra_rb(lst_b, RB);
-
-	if ((*lst_b)->next->pivot == 1)
-		(*lst_b)->pivot = 1;
-	else
-	{
-		while ((*lst_b)->pivot == 0)
-			ft_pa_pb(lst_a, lst_b, PA);
-	}
 }
 
 int main(int argc, char **argv)
