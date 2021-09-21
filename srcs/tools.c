@@ -6,13 +6,27 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 10:56:14 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/21 13:01:35 by Bastian          ###   ########.fr       */
+/*   Updated: 2021/09/21 16:01:51 by Bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lst.h"
 #include "../includes/tools.h"
 #include "../includes/operations.h"
+
+int		ft_little_index(t_list *lst)
+{
+	int nb;
+	
+	nb = lst->index;
+	while ((lst))
+	{
+		if (lst->index < nb)
+			nb = lst->index;
+		lst = lst->next;
+	}
+	return (nb);
+}
 
 void	ft_give_little_numb(t_list **lst, int mark)
 {

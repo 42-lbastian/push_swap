@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 15:09:08 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/21 13:09:56 by Bastian          ###   ########.fr       */
+/*   Updated: 2021/09/21 16:26:28 by Bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../includes/operations.h"
 #include "../includes/sort_ffs.h"
 #include "../includes/quicksort.h"
+#include "../includes/tools.h"
 
 void	ft_quick_three(t_list **lst_a, t_list **lst_b)
 {
@@ -26,10 +27,21 @@ void	ft_quick_three(t_list **lst_a, t_list **lst_b)
 	ft_pa_pb(lst_b, lst_a, PB);
 }
 
-void	ft_sort_four(t_list **lst_a, t_list **lst_b)
+void	ft_quick_four(t_list **lst_a, t_list **lst_b)
 {
-	ft_give_little_numb(lst_a, 0);
-
+	while ((*lst_a)->next)
+	{
+		(*lst_a)->pivot = 1;
+		(*lst_a) = (*lst_a)->next;
+	}
+	(*lst_a)->pivot = 1;
+	(*lst_a) = ft_lstfront((*lst_a));
+	ft_give_little_numb(lst_a, ft_little_index((*lst_a)));
+	ft_pa_pb(lst_b, lst_a, PB);
+	ft_sort_three_a_main(lst_a);
+	ft_pa_pb(lst_b, lst_a, PB);
+	ft_pa_pb(lst_b, lst_a, PB);
+	ft_pa_pb(lst_b, lst_a, PB);
 }
 
 void	ft_send_a_to_b(t_list **lst_a, t_list **lst_b)
@@ -38,7 +50,7 @@ void	ft_send_a_to_b(t_list **lst_a, t_list **lst_b)
 
 	if (ft_lstsize((*lst_a)) == 3)
 		ft_quick_three(lst_a, lst_b);
-	if (ft_lstsize((*lst_a)) == 4)
+	else if (ft_lstsize((*lst_a)) == 4)
 		ft_quick_four(lst_a, lst_b);
 	else
 	{
