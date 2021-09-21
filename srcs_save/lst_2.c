@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 15:25:31 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/21 12:43:46 by Bastian          ###   ########.fr       */
+/*   Updated: 2021/09/20 15:26:24 by Bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_lstsize(t_list *lst)
 	return (size);
 }
 
-t_list	*ft_lstnew(int content, int pivot, int index)
+t_list	*ft_lstnew(int content, int pivot)
 {
 	t_list	*new;
 
@@ -46,7 +46,6 @@ t_list	*ft_lstnew(int content, int pivot, int index)
 		return (NULL);
 	new->content = content;
 	new->pivot = pivot;
-	new->index = index;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

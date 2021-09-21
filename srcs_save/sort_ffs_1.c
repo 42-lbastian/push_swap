@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 14:45:50 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/21 13:05:15 by Bastian          ###   ########.fr       */
+/*   Updated: 2021/09/20 16:31:07 by Bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,40 +33,30 @@ void	ft_ope_biggest(t_list **lst_a, t_list **lst_b)
 	ft_ra_rb(lst_a, RA);
 }
 
-void	ft_sort_four(t_list **lst_a, t_list **lst_b)
-{
-	ft_give_little_numb(lst_a, 0);
-	ft_pa_pb(lst_b, lst_a, PB);
-	ft_sort_three_a_main(lst_a);
-	ft_pa_pb(lst_a, lst_b, PA);
-}
-
-void	ft_sort_five(t_list **lst_a, t_list **lst_b)
-{
-	int i;
-
-	i = 0;
-	while (i < 2)
-	{
-		if ((*lst_a)->index == 0 || (*lst_a)->index == 1)
-		{
-			ft_pa_pb(lst_b, lst_a, PB);
-			i++;
-		}
-		else
-			ft_ra_rb(lst_a, RA);
-	}
-	ft_sort_three_a_main(lst_a);
-	if ((*lst_b)->content < (*lst_b)->next->content)
-		ft_sa_sb(lst_b, SB);
-	ft_pa_pb(lst_a, lst_b, PA);
-	ft_pa_pb(lst_a, lst_b, PA);
-}
-
 void	ft_sort_ffs(t_list **lst_a, t_list **lst_b, int nb)
 {
-	if (nb == 4)
-		ft_sort_four(lst_a, lst_b);
-	if (nb == 5)
-		ft_sort_five(lst_a, lst_b);
+	ft_pa_pb(lst_b, lst_a, PB);
+	if (nb > 4)
+		ft_pa_pb(lst_b, lst_a, PB);
+	if (nb > 5)
+		ft_pa_pb(lst_b, lst_a, PB);
+	if (!(ft_list_is_sort((*lst_a))))
+		ft_sort_three_a_main(lst_a);
+	if (!(ft_list_is_sort((*lst_b))))
+	{
+		if (nb == 5)
+			ft_sa_sb(lst_b, SB);
+		if (nb == 6)
+			ft_sort_three_b_main(lst_b);
+	}
+	while ((*lst_b))
+	{
+		if (ft_is_the_biggest((*lst_b)->content, (*lst_a)))
+			ft_ope_biggest(lst_a, lst_b);
+		while ((*lst_a)->content < (*lst_b)->content
+			&& !(ft_is_the_biggest((*lst_b)->content, (*lst_a))))
+			ft_ra_rb(lst_a, RA);
+		ft_pa_pb(lst_a, lst_b, PA);
+	}
+	ft_right_order(lst_a);
 }

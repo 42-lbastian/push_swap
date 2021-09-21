@@ -6,37 +6,13 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 10:56:14 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/21 13:01:35 by Bastian          ###   ########.fr       */
+/*   Updated: 2021/09/20 16:27:52 by Bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lst.h"
 #include "../includes/tools.h"
 #include "../includes/operations.h"
-
-void	ft_give_little_numb(t_list **lst, int mark)
-{
-	int	i;
-	int	y;
-
-	i = 0;
-	y = 0;
-	while ((*lst)->next)
-	{
-		if ((*lst)->index == mark)
-			y = i;
-		i++;
-		(*lst) = (*lst)->next;
-	}
-	(*lst) = ft_lstfront((*lst));
-	while ((*lst)->index != mark)
-	{
-		if (y <= i / 2)
-			ft_ra_rb(lst, RA);
-		else
-			ft_rra_rrb(lst, RRA);
-	}
-}
 
 int	ft_list_is_sort(t_list *list)
 {
@@ -122,6 +98,6 @@ int	ft_atoi(t_list **lst, char *str)
 	result *= neg_pos;
 	if (result > 2147483647 || result < -2147483648 || compt > 100000000000)
 		return (1);
-	ft_lstadd_back(lst, ft_lstnew((int)result, 0, 0));
+	ft_lstadd_back(lst, ft_lstnew((int)result, 0));
 	return (0);
 }

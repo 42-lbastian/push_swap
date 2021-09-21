@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:06:31 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/21 12:50:56 by Bastian          ###   ########.fr       */
+/*   Updated: 2021/09/20 16:03:13 by Bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	print_list(t_list *list)
 		while (list)
 		{
 			printf("%d ", list->content);
-			printf("%d ", list->index);
 			printf("%d", list->pivot);
 			printf("\n");
 			list = list->next;
@@ -82,7 +81,6 @@ int main(int argc, char **argv)
 		}
 		if (ft_list_is_sort(lst_a))
 			return (0);
-		ft_add_index(&lst_a);
 		if (argc == 3)
 			ft_sa_sb(&lst_a, SA);
 		else if (argc == 4)

@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 15:09:08 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/21 13:09:56 by Bastian          ###   ########.fr       */
+/*   Updated: 2021/09/20 16:03:32 by Bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,12 @@ void	ft_quick_three(t_list **lst_a, t_list **lst_b)
 	ft_pa_pb(lst_b, lst_a, PB);
 }
 
-void	ft_sort_four(t_list **lst_a, t_list **lst_b)
-{
-	ft_give_little_numb(lst_a, 0);
-
-}
-
 void	ft_send_a_to_b(t_list **lst_a, t_list **lst_b)
 {
 	int	pivot;
 
 	if (ft_lstsize((*lst_a)) == 3)
 		ft_quick_three(lst_a, lst_b);
-	if (ft_lstsize((*lst_a)) == 4)
-		ft_quick_four(lst_a, lst_b);
 	else
 	{
 		while ((*lst_a))
@@ -97,31 +89,15 @@ void	ft_check_pivot(t_list **lst)
 	(*lst) = ft_lstfront((*lst));
 }
 
-void	ft_check_two_element(t_list **lst)
-{
-	if (ft_lstsize((*lst)) >= 4)
-	{
-		if ((*lst)->pivot == 0 && ft_lstlast((*lst))->pivot == 1
-			&& (*lst)->next->pivot == 0 && (*lst)->next->next->pivot == 1)
-		{
-			if ((*lst)->content < (*lst)->next->content)
-				ft_sa_sb(lst, SB);
-			(*lst)->pivot = 1;
-			(*lst)->next->pivot = 1;
-		}
-	}
-}
-
 void	ft_new_element(t_list **lst_a, t_list **lst_b)
 {
 	while ((*lst_b)->pivot == 1)
-	{
 		ft_ra_rb(lst_b, RB);
-		if ((*lst_b)->pivot == 0)
-			ft_check_two_element(lst_b);
-		if (!(ft_all_pivot((*lst_b))))
-			break;
+	if ((*lst_b)->next->pivot == 1)
+		(*lst_b)->pivot = 1;
+	else
+	{
+		while ((*lst_b)->pivot == 0)
+			ft_pa_pb(lst_a, lst_b, PA);
 	}
-	while ((*lst_b)->pivot == 0)
-		ft_pa_pb(lst_a, lst_b, PA);
 }
