@@ -1,6 +1,6 @@
 NAME = push_swap
 
-SRCS = srcs/lst_1.c srcs/lst_2.c srcs/operations_1.c srcs/operations_2.c srcs/push_swap.c srcs/tools.c srcs/sort_ffs_1.c srcs/sort_ffs_2.c srcs/sort_ffs_3.c srcs/quicksort.c srcs/check.c srcs/tools_index.c
+SRCS = srcs/lst_1.c srcs/lst_2.c srcs/operations_1.c srcs/operations_2.c srcs/push_swap.c srcs/tools.c srcs/sort_ffs_1.c srcs/sort_ffs_2.c srcs/sort_ffs_3.c srcs/quicksort.c srcs/quicksort_tff.c srcs/check.c srcs/tools_index.c srcs/tools_quicksort.c
 
 OBJS = ${SRCS:.c=.o}
 

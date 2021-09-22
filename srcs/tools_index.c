@@ -6,15 +6,15 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 11:46:49 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/22 11:57:10 by lbastian         ###   ########.fr       */
+/*   Updated: 2021/09/22 13:16:33 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lst.h"
 
-int		ft_how_many_less(t_list *lst, int nb)
+int	ft_how_many_less(t_list *lst, int nb)
 {
-	int compt;
+	int	compt;
 
 	compt = 0;
 	while (lst)

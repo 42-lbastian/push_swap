@@ -6,100 +6,13 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 10:56:14 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/22 12:17:56 by lbastian         ###   ########.fr       */
+/*   Updated: 2021/09/22 14:21:57 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lst.h"
 #include "../includes/tools.h"
 #include "../includes/operations.h"
-
-
-int		ft_smaller_biggest_element(int nb, t_list *lst, int option)
-{
-	int big;
-	int small;
-
-	big = 0;
-	small = 0;
-	while (lst)
-	{
-		if (lst->content > nb)
-			big++;
-		else if (lst->content < nb)
-			small++;
-		lst = lst->next;
-	}
-	if (option == 1)
-		return (big);
-	return (small);
-}
-
-int		ft_little_index(t_list *lst)
-{
-	int nb;
-	
-	nb = lst->index;
-	while ((lst))
-	{
-		if (lst->index < nb)
-			nb = lst->index;
-		lst = lst->next;
-	}
-	return (nb);
-}
-
-void	ft_give_numb(t_list **lst, int mark)
-{
-	int	i;
-	int	y;
-
-	i = 0;
-	y = 0;
-	while ((*lst)->next)
-	{
-		if ((*lst)->content == mark)
-			y = i;
-		(*lst) = (*lst)->next;
-		i++;
-	}
-	if ((*lst)->content == mark)
-		y = i;
-	(*lst) = ft_lstfront((*lst));
-	while ((*lst)->content != mark)
-	{
-		if (y <= i / 2)
-			ft_ra_rb(lst, RA);
-		else
-			ft_rra_rrb(lst, RRA);
-	}
-}
-
-void	ft_give_index_numb(t_list **lst, int mark)
-{
-	int	i;
-	int	y;
-
-	i = 0;
-	y = 0;
-	while ((*lst)->next)
-	{
-		if ((*lst)->index == mark)
-			y = i;
-		(*lst) = (*lst)->next;
-		i++;
-	}
-	if ((*lst)->index == mark)
-		y = i;
-	(*lst) = ft_lstfront((*lst));
-	while ((*lst)->index != mark)
-	{
-		if (y <= i / 2)
-			ft_ra_rb(lst, RA);
-		else
-			ft_rra_rrb(lst, RRA);
-	}
-}
 
 int	ft_list_is_sort(t_list *list)
 {
@@ -158,17 +71,13 @@ int	ft_strlen(char *str)
 	return (compt);
 }
 
-int	ft_atoi(t_list **lst, char *str)
+int	ft_atoi(t_list **lst, char *str, long result, int neg_pos)
 {
-	int		neg_pos;
-	long	result;
 	int		index;
-	long	compt;
+	unsigned long	compt;
 
-	result = 0;
 	index = ft_strlen(str) - 1;
 	compt = 1;
-	neg_pos = 1;
 	if (str[0] == '-')
 		neg_pos = -1;
 	while (index >= 0)

@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 10:43:16 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/21 12:45:57 by Bastian          ###   ########.fr       */
+/*   Updated: 2021/09/22 12:48:59 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_sa_sb(t_list **lst, char *str)
 {
 	int	content;
 	int	pivot;
-	int index;
+	int	index;
 
 	if ((!(*lst)) || (*lst)->next == NULL)
 		return (1);
@@ -47,7 +47,7 @@ int	ft_pa_pb(t_list **lst_1, t_list **lst_2, char *str)
 	if (!(lst_2))
 		return (1);
 	ft_lstadd_front(lst_1, ft_lstnew((*lst_2)->content, (*lst_2)->pivot,
-		(*lst_2)->index));
+			(*lst_2)->index));
 	ft_lstdelone(lst_2);
 	write(1, str, ft_strlen(str));
 	return (0);
@@ -57,7 +57,7 @@ int	ft_ra_rb(t_list **lst, char *str)
 {
 	int	value;
 	int	pivot;
-	int index;
+	int	index;
 
 	if (!((*lst)->next))
 		return (1);

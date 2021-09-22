@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 15:30:53 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/21 12:47:04 by Bastian          ###   ########.fr       */
+/*   Updated: 2021/09/22 12:49:14 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_rra_rrb(t_list **lst, char *str)
 {
 	int	value;
 	int	pivot;
-	int index;
+	int	index;
 
 	if (!((*lst)->next))
 		return (1);

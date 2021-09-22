@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 14:45:50 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/22 11:52:45 by lbastian         ###   ########.fr       */
+/*   Updated: 2021/09/22 13:15:57 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_sort_four(t_list **lst_a, t_list **lst_b)
 
 void	ft_sort_five(t_list **lst_a, t_list **lst_b)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 2)
