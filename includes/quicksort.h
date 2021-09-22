@@ -5,5 +5,6 @@ void ft_send_a_to_b(t_list **lst_a, t_list **lst_b);
 int	ft_all_pivot(t_list *lst);
 void	ft_check_pivot(t_list **lst);
 void	ft_new_element(t_list **lst_a, t_list **lst_b);
+int		ft_calc_mediane(t_list *lst);
 
 #endif

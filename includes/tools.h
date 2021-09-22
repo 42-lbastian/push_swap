@@ -5,7 +5,9 @@ int		ft_atoi(t_list **lst, char *str);
 int		ft_strlen(char *str);
 int		ft_list_is_sort(t_list *list);
 void	ft_right_order(t_list **lst);
-void	ft_give_little_numb(t_list **lst, int mark);
+void	ft_give_index_numb(t_list **lst, int mark);
 int		ft_little_index(t_list *lst);
+void	ft_give_numb(t_list **lst, int mark);
+int		ft_smaller_biggest_element(int nb, t_list *lst, int option);
 
 #endif

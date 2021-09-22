@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 14:45:50 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/21 13:05:15 by Bastian          ###   ########.fr       */
+/*   Updated: 2021/09/22 11:52:45 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_ope_biggest(t_list **lst_a, t_list **lst_b)
 
 void	ft_sort_four(t_list **lst_a, t_list **lst_b)
 {
-	ft_give_little_numb(lst_a, 0);
+	ft_give_index_numb(lst_a, 0);
 	ft_pa_pb(lst_b, lst_a, PB);
 	ft_sort_three_a_main(lst_a);
 	ft_pa_pb(lst_a, lst_b, PA);
