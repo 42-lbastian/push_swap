@@ -6,9 +6,11 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 10:43:16 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/22 12:48:59 by lbastian         ###   ########.fr       */
+/*   Updated: 2021/10/01 15:30:20 by Bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+//DEBUG
 
 #include "../includes/operations.h"
 #include "../includes/lst.h"

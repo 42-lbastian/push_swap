@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:06:31 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/22 14:21:13 by lbastian         ###   ########.fr       */
+/*   Updated: 2021/10/01 15:25:47 by Bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,6 @@
 #include "../includes/tools.h"
 #include "../includes/quicksort.h"
 #include "../includes/check.h"
-
-#define SA "sa\n"
-#define SB "sb\n"
-#define PA "pa\n"
-#define PB "pb\n"
-#define RA "ra\n"
-#define RB "rb\n"
-#define RRA "rra\n"
-#define RRB "rrb\n"
 
 void	print_list(t_list *list)
 {
@@ -59,8 +50,7 @@ void	ft_sort_main(t_list *lst_a, t_list *lst_b, int argc)
 {
 	ft_add_index(&lst_a);
 	if (ft_list_is_sort(lst_a))
-	{
-	}
+		return ;
 	else if (argc == 3)
 		ft_sa_sb(&lst_a, SA);
 	else if (argc == 4)
@@ -82,33 +72,45 @@ void	ft_sort_main(t_list *lst_a, t_list *lst_b, int argc)
 			ft_pa_pb(&lst_a, &lst_b, PA);
 		ft_right_order(&lst_a);
 	}
+	ft_lstclear(&lst_a);
+}
+
+int	ft_init_check_list(t_list **lst_a, int argc, char **argv)
+{
+	int	i;
+
+	i = 1;
+	while (i < argc)
+	{
+		if (ft_atoi(lst_a, argv[i], 0, 1))
+		{
+			ft_lstclear(lst_a);
+			write(2, "Error\n", ft_strlen("Error\n"));
+			return (1);
+		}
+		if (ft_check_dup((*lst_a)))
+		{
+			ft_lstclear(lst_a);
+			write(2, "Error\n", ft_strlen("Error\n"));
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	int		i;
 	t_list	*lst_a;
 	t_list	*lst_b;
 
 	lst_a = NULL;
 	lst_b = NULL;
-	i = 1;
 	if (argc > 2)
 	{
-		while (i < argc)
-		{
-			if (ft_atoi(&lst_a, argv[i], 0, 1))
-			{
-				write(2, "Error\n", ft_strlen("Error\n"));
-				return (1);
-			}
-			if (ft_check_dup(lst_a))
-			{
-				write(2, "Error\n", ft_strlen("Error\n"));
-				return (1);
-			}
-			i++;
-		}
+		if (ft_init_check_list(&lst_a, argc, argv))
+			return (1);
 		ft_sort_main(lst_a, lst_b, argc);
 	}
+	return (0);
 }

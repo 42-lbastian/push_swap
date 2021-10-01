@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 10:56:14 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/22 14:21:57 by lbastian         ###   ########.fr       */
+/*   Updated: 2021/09/22 15:47:20 by lbastian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	ft_strlen(char *str)
 
 int	ft_atoi(t_list **lst, char *str, long result, int neg_pos)
 {
-	int		index;
+	int				index;
 	unsigned long	compt;
 
 	index = ft_strlen(str) - 1;

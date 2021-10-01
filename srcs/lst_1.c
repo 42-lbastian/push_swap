@@ -6,7 +6,7 @@
 /*   By: Bastian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:05:04 by Bastian           #+#    #+#             */
-/*   Updated: 2021/09/20 15:26:04 by Bastian          ###   ########.fr       */
+/*   Updated: 2021/10/01 15:26:30 by Bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,31 @@ void	ft_lstclear(t_list **lst)
 
 void	ft_lstdelone(t_list **lst)
 {
+	t_list	*prev;
+	t_list	*next;
+
+	if (lst == NULL || *lst == NULL)
+		return ;
+	prev = (*lst)->prev;
+	next = (*lst)->next;
 	if (!(*lst)->next && !(*lst)->prev)
+	{
+		free(*lst);
 		(*lst) = NULL;
+	}	
 	else
 	{
-		if ((*lst)->prev)
-			(*lst)->prev->next = (*lst)->next;
+	//	next->prev = NULL;
+	//	prev->next = NULL;
+		if (prev)
+			prev->next = next;
+		if (next)
+			next->prev = prev;
+		free(*lst);
+		if (next)
+			(*lst) = next;
 		else
-			((*lst)->next->prev = NULL);
-		if ((*lst)->next)
-			(*lst)->next->prev = (*lst)->prev;
-		else
-			((*lst)->prev->next = NULL);
-		if ((*lst)->next)
-			(*lst) = (*lst)->next;
-		else
-			(*lst) = (*lst)->prev;
+			(*lst) = prev;
 	}
 }
 
@@ -69,8 +78,8 @@ t_list	*ft_lstlast(t_list *lst)
 
 t_list	*ft_lstfront(t_list *lst)
 {
-	if (!(lst))
-		return (lst);
+	if (!lst)
+		return (NULL);
 	while (lst->prev)
 		lst = lst->prev;
 	return (lst);
