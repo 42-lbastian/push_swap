@@ -45,15 +45,15 @@ I used a **quicksort algorithm**, but I had to customize it to fit with the inst
 
 <h2 id="usage_id"> Usage: </h2>
 
+#### Compilation: (in the folder that contain the makefile)
+```shell
+make
+```
+
 #### How to run it:
 
 ```shell
 ./push_swap (list of numbers to sort)
-```
-
-You just have to type (in the folder that contain the makefile)
-```shell
-make
 ```
 
 You can generate a list of 100 numbers with this command (you can edit it to print more numbers):
