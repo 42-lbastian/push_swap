@@ -45,6 +45,12 @@ I used a **quicksort algorithm**, but I had to customize it to fit with the inst
 
 <h2 id="usage_id"> Usage: </h2>
 
+#### How to use it:
+
+```shell
+./push_swap (list of numbers to sort)
+```
+
 You just have to type (in the folder that contain the makefile)
 ```shell
 make
